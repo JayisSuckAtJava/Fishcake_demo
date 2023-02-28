@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>수산식품 스마트가공 서버</title>
+        <link href="css/styles.css" rel="stylesheet" />
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+
+        <!--    탑 네비   -->
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            
+            <!-- 제목-->
+            <a class="navbar-brand ps-3" href="index.html" style="margin-right: 15px;">수산식품 스마트가공 서버</a>
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+            <!-- Navbar-->
+            <div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            </div>
+            <div>
+                <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#!">LOGIN</a></li>
+                            <li><a class="dropdown-item" href="#!">LOGOUT</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div id="layoutSidenav">
+            <!-- 여기 top 보내야함 사이드바-->
+            <div id="layoutSidenav_nav" style="top : 10%">
+                <main>
+                    <div class="container-fluid px-4">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                </svg>
+                                &nbsp;    SYSTEM
+                            </div>
+                            <div class="card-body">
+                                <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+                                    <div class="dataTable-top"></div>
+                                    <div class="dataTable-container" style="overflow: hidden;">
+                                        <table id="systemTable" class="dataTable-table">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 5.7368%;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-123" viewBox="0 0 16 16">
+                                                            <path d="M2.873 11.297V4.142H1.699L0 5.379v1.137l1.64-1.18h.06v5.961h1.174Zm3.213-5.09v-.063c0-.618.44-1.169 1.196-1.169.676 0 1.174.44 1.174 1.106 0 .624-.42 1.101-.807 1.526L4.99 10.553v.744h4.78v-.99H6.643v-.069L8.41 8.252c.65-.724 1.237-1.332 1.237-2.27C9.646 4.849 8.723 4 7.308 4c-1.573 0-2.36 1.064-2.36 2.15v.057h1.138Zm6.559 1.883h.786c.823 0 1.374.481 1.379 1.179.01.707-.55 1.216-1.421 1.21-.77-.005-1.326-.419-1.379-.953h-1.095c.042 1.053.938 1.918 2.464 1.918 1.478 0 2.642-.839 2.62-2.144-.02-1.143-.922-1.651-1.551-1.714v-.063c.535-.09 1.347-.66 1.326-1.678-.026-1.053-.933-1.855-2.359-1.845-1.5.005-2.317.88-2.348 1.898h1.116c.032-.498.498-.944 1.206-.944.703 0 1.206.435 1.206 1.07.005.64-.504 1.106-1.2 1.106h-.75v.96Z"/>
+                                                        </svg>
+                                                    </th>
+                                                    <th>
+                                                        <a href="#" class="dataTable-sorter">Name</a>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr onclick="clickSystem(this)">
+                                                    <td>1</td>
+                                                    <td>Forhumantech</td>
+                                                </tr>
+                                                <tr onclick="clickSystem(this)">
+                                                    <td>3</td>
+                                                    <td>부산 범표어묵</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="dataTable-bottom">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <!-- 메인 컨텐츠-->
+            <div id="layoutSidenav_content">
+                <main>
+                    <!-- Content 2 입니다.-->
+                    <div class="container-fluid px-4" id="content_display">
+                        <h1 class="mt-4">검출 이벤트</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">조회</li>
+                        </ol>
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-columns-reverse" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M0 .5A.5.5 0 0 1 .5 0h2a.5.5 0 0 1 0 1h-2A.5.5 0 0 1 0 .5Zm4 0a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1h-10A.5.5 0 0 1 4 .5Zm-4 2A.5.5 0 0 1 .5 2h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 4h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 6h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 8h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1h-10a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5Z"/>
+                                        </svg>
+                                        &nbsp;  LOG
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+                                            <div class="dataTable-top"></div>
+                                            <div class="dataTable-container" style="overflow: hidden;">
+                                                <table id="logTable" class="dataTable-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 60%;">
+                                                                <a href="#" class="dataTable-sorter">TIME</a>
+                                                            </th>
+                                                            <th style="width: 20%;">
+                                                                <a href="#" class="dataTable-sorter">DETECED</a>
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="dataTable-bottom">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-reels-fill" viewBox="0 0 16 16">
+                                            <path d="M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                            <path d="M9 6a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                                            <path d="M9 6h.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h7z"/>
+                                        </svg>
+                                        
+                                        &nbsp;    VISION INSPECTION IMAGE
+                                    </div>
+                                    <div class="card-body">
+                                    	<div id="displayOne">
+                                            <img src="" alt="VISION INSPECTION">
+                                    	</div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="dataTable-container" style="overflow: hidden;">
+                                            <table id="visionDetectedList" class="dataTable-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 50%;">
+                                                            <a href="#" class="dataTable-sorter">DETECED MATTER</a>
+                                                        </th>
+                                                        <th style="width: 30%;">
+                                                            <a href="#" class="dataTable-sorter">SCORE</a>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-reels-fill" viewBox="0 0 16 16">
+                                            <path d="M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                            <path d="M9 6a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                                            <path d="M9 6h.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h7z"/>
+                                        </svg>
+                                        &nbsp;    SPECTRAL INSPECTION IMAGE
+                                    </div>
+                                    <div class="card-body">
+                                    	<div id="displayTwo">
+                                            <img src="" alt="SPECTRAL INSPECTION">
+                                    	</div>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="dataTable-container" style="overflow: hidden;">
+                                            <table id="spectralDetectedList" class="dataTable-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>
+                                                            <a href="#" class="dataTable-sorter">DETECED MATTER</a>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <!-- 푸터-->
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; KIOST & PNU 2022</div>
+                            <div style= "width: 100%; text-align: right;">
+                                <img src="/img/pukyong.gif" alt="CI" style="height: 90px;">
+                                <img src="/img/kiost.png" alt="CI" style="height: 90px;">
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    </body>
+    <script src="js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script type="text/javascript">
+    /** Axios Script **/
+
+    /** System 접속시 LOG 전체를 받아올 객체. func tableChoose(System) 으로 제어 **/
+    let logDB = {}
+    
+    /** System 혹은 Log 에 TR 선택시 작동-기능에 하당하는 func **/
+    function tableChoose(which, index) {
+    	
+        // 로그의 경우 시간을 기준으로 갱신
+    	if(which == 'log') {    
+            // 표시 데이터를 updateTable(Data)로 실행
+            updateTable('log', logDB[index])
+
+        // 시스템의 경우
+    	}else if(which == 'system') {
+            // 비동기
+            axios({
+                method: 'get',
+                url: `/get/log/${index}`
+            }).then( (res)=>{
+                // LOG 객체 초기화
+                logDB = {}
+                for(i of res.data) {
+
+                    // LOGDB = { 'stringBuilder(Time)' : [Data1, Data2] }
+                    if(stringBuilder(i.dt) in logDB) {
+                        logDB[stringBuilder(i.dt)].push(i);
+                    }else {
+                        logDB[stringBuilder(i.dt)] = [i];
+                    }
+                }
+                // LOGDB 생성 후 Table에 작성하기 위해 updateTable(Data)로 실행
+                updateTable('system', res.data);
+
+            })
+    	}
+
+    }
+
+    /** table 하위 TableBody에 TR 입력 및 데이터 표시 FUNC **/
+    function updateTable(which, data) {
+        // innerHTML 을 위한 전역 String 변수
+        let html = ""
+
+        // LOG 의 updateTable 경우
+        if(which == 'log') {    
+
+            // IMG 파일 제어를 위한 display 변수 선언 및 하위 검출 품목 LIST 생성
+            let displayOne = document.querySelector("#displayOne > img");
+            let displayTwo = document.querySelector("#displayTwo > img");
+            let dpOneIcon = displayOne.parentElement.parentElement.parentElement.firstElementChild.firstElementChild;
+            let dpTwoIcon = displayTwo.parentElement.parentElement.parentElement.firstElementChild.firstElementChild;
+            let dpOneRoot = [];
+            let dpTwoRoot = [];
+            // Byte[]를 IMG 로 바로 표시하기 위한 상수
+			const path = "data:image/png;base64,"
+            
+            // DATA 가 없을시 흰색 카메라 있을시 검은색 카메라
+            dpOneIcon.innerHTML = camIconWhite
+            dpTwoIcon.innerHTML = camIconWhite
+
+            for(i of data) {
+                if(i['type'] == 'vision') {
+                    // VISION 이미지는 DISPLAY ONE
+                    displayOne.setAttribute('src', path + i['data']);
+                    dpOneRoot = i['rootList']
+                    dpOneIcon.innerHTML = camIconBlack
+                }else if(i['type'] == 'spectral') {
+                    // SPECTRAL 이미지는 DISPLAY TWO
+                    displayTwo.setAttribute('src', path + i['data']);
+                    dpTwoRoot = i['rootList']
+                    dpTwoIcon.innerHTML = camIconBlack
+                }
+            }
+            
+            // 검출 품목 테이블 지정 변수 생성
+            let visionDetectedList = document.querySelector("#visionDetectedList > tbody");
+            let spectralDetectedList = document.querySelector("#spectralDetectedList > tbody");
+
+            for(i of dpOneRoot) {
+                if(i['detectedList'] != ''){
+                    // 검출된 이물질 명칭, SCORE 표시
+                    html += '<tr>';
+                    html += `<td>${i['detectedList']['title']}</td>`;
+                    html += `<td>&nbsp ${i['data']}</td>`;
+                    html += "</tr>";
+                    visionDetectedList.innerHTML = html;
+                }
+            }
+
+            // innerHTML 을 위한 전역 변수 초기화
+            html = ""
+
+            for(i of dpTwoRoot) {
+                if(i['detectedList'] != ''){
+                    // 검출된 이물질의 명칭 표시
+                    html += '<tr>';
+                    html += `<td>${i['detectedList']['title']} - 검출 됨</td>`;
+                    html += "</tr>";
+                    spectralDetectedList.innerHTML = html;
+                }
+            }
+   
+        // System의 updateTable 경우
+    	}else if(which == 'system') {
+
+            // System 의 Response 를 입력하기 위한 LogTable 지정
+            let table = document.querySelector("#logTable > tbody")
+
+            // time - Object <V> <S> 식으로 표현
+            for (const [key, value] of Object.entries(logDB)) {
+                html += '<tr onclick="clickLog(this)">';
+                html += `<td>${key}</td>`;
+
+                //html += `<td>${i['detectedList']['obj']['ko']} : ${i['detectedList']['title']}</td>`;
+                html += `<td>${value[0]['detectedList']['obj']['ko']}`
+
+                for(i of value){
+                    // 검출된 카메라의 TYPE ( V, S )
+                    html += `< ${i['type'].toUpperCase()[0]} >`;
+                    
+                }
+                html += '</td>'
+                html += "</tr>";
+              }
+
+            table.innerHTML = html;
+    	}
+    }
+    </script>
+    
+    <script type="text/javascript">
+    // 단순 기능 Script
+
+        /** systemTable 의 TR 클릭시 작동하는 FUNC **/
+        function clickSystem(tr) {
+            // 해당 테이블 위치 지정
+        	let systemList = document.querySelectorAll("#systemTable > tbody > tr")
+            let index = tr.firstElementChild.innerHTML; // System 의 PK
+            
+            // 전체 TR 배경 원복 및 지정 TR 배경 변경
+            for(i of systemList) {
+                i.style.background = "white"
+            }
+            tr.style.background = "rgba(0, 0, 0, 0.150)"
+            // 비동기, 데이터 처리, 표시를 위한 tableChoose
+            tableChoose("system", index)
+        }
+
+        /** logTable 의 TR 클릭시 작동하는 FUNC **/
+        function clickLog(tr) {
+            // 해당 테이블 위치 지정
+            let logList = document.querySelectorAll("#logTable > tbody > tr")
+            let index = tr.firstElementChild.innerHTML; // Log 의 Time
+
+            // 전체 TR 배경 원복 및 지정 TR 배경 변경
+            for(i of logList) {
+                i.style.background = "white"
+            }
+            tr.style.background = "rgba(0, 0, 0, 0.150)"
+            // 비동기, 데이터 처리, 표시를 위한 tableChoose
+            tableChoose("log", index)
+        }
+        
+        
+        
+        
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+        // etc
+
+        /** 창모드 시 빈칸 선택하여 SideNav 닫는 Func **/
+        let contentBody = document.querySelector("#layoutSidenav_content")
+        contentBody.addEventListener('click',()=>{
+            let body = document.querySelector('body')
+            body.setAttribute('class','sb-nav-fixed')
+        })
+
+        /** String 으로 된 Date(JAVA)를 변환 **/
+        function stringBuilder(rawDate) {
+        	let date = new Date(rawDate);
+            const month = (date.getMonth() + 1) >= 10 ? (date.getMonth() + 1) : `0${date.getMonth() + 1}`;
+            const day = date.getDate() >= 10 ? date.getDate() : `0${date.getDate()}`;
+            const hours = date.getHours() >= 10 ? date.getHours() : `0${date.getHours()}`;
+            const minutes = date.getMinutes() >= 10 ? date.getMinutes() : `0${date.getMinutes()}`;
+            const seconds = date.getSeconds() >= 10 ? date.getSeconds() : `0${date.getSeconds()}`;
+            return `${date.getFullYear()}-${month}-${day} ${hours}:${minutes}:${seconds}`
+        }
+
+        /** 상단 card Header 에 들어가는 ICON  **/
+        const camIconWhite = '<path d="M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM1 3a2 2 0 1 0 4 0 2 2 0 0 0-4 0z"/><path d="M9 6h.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h7zm6 8.73V7.27l-3.5 1.555v4.35l3.5 1.556zM1 8v6a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1z"/><path d="M9 6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM7 3a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>'
+        const camIconBlack = '<path d="M6 3a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/><path d="M9 6a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/><path d="M9 6h.5a2 2 0 0 1 1.983 1.738l3.11-1.382A1 1 0 0 1 16 7.269v7.462a1 1 0 0 1-1.406.913l-3.111-1.382A2 2 0 0 1 9.5 16H2a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h7z"/>'
+        
+        ///////////////////////////////////////////////////////////////////////////////////////////////
+    </script>
+</html>

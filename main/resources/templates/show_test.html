@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>hi</h1>
+<script>
+    let ta = {'12' : [1, 2, 3], '11' : [3, 4, 5]}
+    /*ta.map( (a, b, c) => 
+    {
+        console.log(a)
+        console.log(b)
+        console.log(c)
+    })*/
+
+    for (const [key, value] of Object.entries(ta)) {
+        console.log(key, value);
+      }
+</script>
+</body>
+</html>

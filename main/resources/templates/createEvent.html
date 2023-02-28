@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>스마트가공 - 접속</title>
+        <link href="/css/styles.css" rel="stylesheet" />
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="bg-primary">
+    
+		
+		<div class="modal fade" id="alertModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+							<div class="modal-dialog modal-dialog-scrollable modal-fullscreen-md-down">
+
+							  <div class="modal-content">
+							  
+							  	  <div class="modal-header">
+							  	  	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building-add me-3" viewBox="0 0 16 16">
+									  <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Z"/>
+									  <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6.5a.5.5 0 0 1-1 0V1H3v14h3v-2.5a.5.5 0 0 1 .5-.5H8v4H3a1 1 0 0 1-1-1V1Z"/>
+									  <path d="M4.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z"/>
+									</svg>
+							        <h5 class="modal-title">FIND MY DETECTED</h5>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+							      </div>
+							      
+							      <div class="modal-body">
+							      	<small class="text-muted">적용될 물질을 검색해 주세요.</small>
+							      	<div class="form-floating mb-3">
+							      		<input type="text" class="form-control rounded-3" id="searchDetInput">
+							      		<label for="searchSysInput">물체 명을 정확히 입력해주세요 (한글명)</label>
+							      	</div>
+							      	
+							      	<ul class="d-grid gap-1 my-1 list-unstyled" id="findDetList">
+							          
+							        </ul>
+							      
+							      </div>
+							      
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+							      </div>
+
+							  </div>
+
+							</div>
+                        </div>
+		<div class="modal fade" id="confirmModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+							<div class="modal-dialog modal-dialog-scrollable modal-fullscreen-md-down">
+
+							  <div class="modal-content">
+							  
+							  	  <div class="modal-header">
+							  	  	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building-add me-3" viewBox="0 0 16 16">
+									  <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Z"/>
+									  <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6.5a.5.5 0 0 1-1 0V1H3v14h3v-2.5a.5.5 0 0 1 .5-.5H8v4H3a1 1 0 0 1-1-1V1Z"/>
+									  <path d="M4.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z"/>
+									</svg>
+							        <h5 class="modal-title">FIND MY SYSTEM</h5>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+							      </div>
+							      
+							      <div class="modal-body">
+							      	<small class="text-muted">사용하실 시스템을 검색해 주세요.</small>
+							      	<div class="form-floating mb-3">
+							      		<input type="text" class="form-control rounded-3" id="searchSysInput">
+							      		<label for="searchSysInput">시스템 명을 정확히 입력해 주세요.</label>
+							      	</div>
+							      	
+							      	<ul class="d-grid gap-1 my-1 list-unstyled" id="findSysList">
+							          
+							        </ul>
+							      
+							      </div>
+							      
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+							      </div>
+
+							  </div>
+
+							</div>
+                        </div>
+		
+    	
+    
+         <div id="layoutAuthentication">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-7">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">CREATE EVENT</h3></div>
+                                    <div class="card-body">
+                                        <form method="post" enctype="multipart/form-data">
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <div class="form-floating mb-3 mb-md-0">
+                                                        <!-- <input class="form-control" id="inputDate" type="datetime-local" name="dt"/> -->
+                                                        <input class="form-control" id="inputDate" type="datetime-local" name="dt" step="1"/>
+                                                        <label for="inputDate">DATE</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-floating" id="switchingDiv">
+                                                        <input class="form-control" id="inputData" type="file" name="data"/>
+                                                        <label for="inputData">DATA</label>
+                                                    </div>
+                                                </div>
+                                                <!-- <div class="col-md-6"> setAttribute type = [ file | text ] & label.innerHTML = [ DATA | TEXT ]
+                                                    <div class="form-floating">
+                                                        <input class="form-control" id="inputData" type="text" name="data"/>
+                                                        <label for="inputData">TEXT</label>
+                                                    </div>
+                                                </div> -->
+                                                <div class="col-md-2">
+                                                    <div class="form-check form-check-inline d-flex flex-column-reverse">
+														<div class="col-md-4 form-check form-switch">
+														  <input class="form-check-input" type="checkbox" id="typeF">
+														  <label class="form-check-label" for="typeF">F</label>
+														</div>
+														<div class="col-md-4 form-check form-switch">
+														  <input class="form-check-input" type="checkbox" id="typeT">
+														  <label class="form-check-label" for="typeT">T</label>
+														</div>
+													</div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row mb-3">
+                                                <div class="col-md-4">
+                                                    <div class="form-floating mb-3 mb-md-0">
+                                                        <input class="form-control" id="inputRoot" type="text" name="root"/>
+                                                        <label for="inputRoot">ROOT EVENT</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating mb-3 mb-md-0">
+                                                        <input class="form-control" id="inputType" type="text" name="type"/>
+                                                        <label for="inputType">CAMERA TYPE</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-check form-check-inline d-flex flex-column-reverse">
+														<div class="col-md-4 form-check form-switch">
+														  <input class="form-check-input" type="checkbox" id="typeV">
+														  <label class="form-check-label" for="typeV">V</label>
+														</div>
+														<div class="col-md-4 form-check form-switch">
+														  <input class="form-check-input" type="checkbox" id="typeS">
+														  <label class="form-check-label" for="typeS">S</label>
+														</div>
+													</div>
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="form-floating mb-3" id="detDiv">
+                                                <input class="form-control" id="inputDetected" type="text" />
+                                                <input type="hidden" id="inputDetIndex" name="detected"/>
+                                                <label for="inputDetected">DETECTED</label>
+                                            </div>
+                                            <div class="form-floating mb-3" id="sysDiv">
+                                                <input class="form-control" id="inputSystem" type="text" />
+                                                <input type="hidden" id="inputSysIndex" name="map"/>
+                                                <label for="inputSystem">SYSTEM</label>
+                                            </div>
+                                            <div class="mt-4 mb-0">
+                                                <div class="d-grid"><button class="btn btn-primary btn-block">CREATE EVENT</button></div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="card-footer text-center py-3">
+                                        <div class="small"><a href="/index">RETURN TO MAIN</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+           
+            
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="/js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+        <script type="text/javascript">
+        let detDiv = document.querySelector("#detDiv");
+        let sysDiv = document.querySelector("#sysDiv");
+        let confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'), {keyboard: false, focus : true});
+        let alertModal = new bootstrap.Modal(document.getElementById('alertModal'));
+       	let system = document.querySelector("#inputSystem");
+        let search = document.querySelector("#searchSysInput");
+    	let det = document.querySelector("#inputDetected");
+       	let detect = document.querySelector("#searchDetInput");
+        
+       	let inputDate = document.querySelector("#inputDate");
+       	let inputData = document.querySelector("#inputData");
+       	let inputRoot = document.querySelector("#inputRoot");
+       	let inputType = document.querySelector("#inputType");
+       	let inputDetIndex = document.querySelector("#inputDetIndex");
+       	let inputSysIndex = document.querySelector("#inputSysIndex");
+        
+        sysDiv.addEventListener("click",(e)=>{
+       		confirmModal.show();
+       		search.focus();
+       	})
+       	system.addEventListener("focus",(e)=>{
+       		confirmModal.show();
+       		search.focus();
+       	})
+       	
+        search.addEventListener("keydown",(e)=>{
+        	if(e.keyCode == 13) {
+        		axios({
+        			method : 'get',
+        			url : `/get/sysMap`,
+        			params : {
+        				"sysTitle" : search.value
+        			}
+        		}).then((res)=>{
+        			console.log(res.data);
+        			let syslist = document.querySelector("#findSysList");
+        			let html = "";
+        			for(i of res.data) {
+        				html += `<li class="d-flex gap-1">`;
+        				let j;
+        				if(i.radioDto != null) {
+        					j = i.radioDto;
+        					html += `<div class="ms-3" onclick="selectedSys(${i.index}, '${j.title}', '${j.index}')">`;
+            				html += `<h6>RADIOACTIVITY : ${j.title}</h6>`;
+            				html += `<p>${j.index}</p>`;
+            				
+        				}else if(i.specDto !=null) {
+        					
+        					j = i.specDto;
+        					html += `<div class="ms-3" onclick="selectedSys(${i.index}, '${j.title}', '${[j.band, j.frame, j.sample, j.time]}')">`;
+            				html += `<h6>SPECTRAL : ${j.title}</h6>`;
+            				html += `<p>${j.index}</p>`;
+            				
+        				}else if(i.visionDto != null) {
+        					
+        					j = i.visionDto;
+        					html += `<div class="ms-3" onclick="selectedSys(${i.index}, '${j.title}', '${j.ip}')">`;
+            				html += `<h6>VISION : ${j.ip}</h6>`;
+            				html += `<p>${j.port}</p>`;
+            				
+        				}
+        				/*
+        				html += `<div class="ms-3" onclick="selectedSys(${i.index}, '${i.businessDto.title}', '${i.title}')">`;
+        				html += `<h6>${i.businessDto.title}</h6>`;
+        				html += `<p>${i.title}</p>`;
+        				*/
+        				html += `</li>`;
+        				html += `<hr>`;
+        			}
+        			syslist.innerHTML = html;
+        		})
+           		system.disabled = true;
+        	}
+        });
+        function selectedSys(index, business, title) {
+        	let hideInput = document.querySelector("#inputSysIndex");
+        	hideInput.value = index;
+        	system.value = `${business} : ${title}`;
+        	confirmModal.hide();
+        }
+        
+       
+        detDiv.addEventListener("click",(e)=>{
+        	alertModal.show();
+        	detect.focus();
+       	})
+       	det.addEventListener("focus",(e)=>{
+       		alertModal.show();
+       		detect.focus();
+       	})
+       	
+        detect.addEventListener("keydown",(e)=>{
+        	if(e.keyCode == 13) {
+        		axios({
+        			method : 'get',
+        			url : `/get/detList`,
+        			params : {
+        				"object" : detect.value
+        			}
+        		}).then((res)=>{
+        			console.log(res.data);
+        			let detlist = document.querySelector("#findDetList");
+        			let html = "";
+        			for(i of res.data) {
+        				html += `<li class="d-flex gap-1">`;
+        				html += `<div class="ms-3" onclick="selectedDet(${i.index}, '${i.obj.ko}', '${i.title}')">`;
+        				html += `<h6>${i.obj.ko} ${i.obj.info}</h6>`;
+        				html += `<p>${i.title}</p>`;
+        				html += `</li>`;
+        				html += `<hr>`;
+        			}
+        			detlist.innerHTML = html;
+        		})
+           		det.disabled = true;
+        	}
+        });
+        function selectedDet(index, ko, title) {
+        	let hideInput = document.querySelector("#inputDetIndex");
+        	hideInput.value = index;
+        	det.value = `${ko} : ${title}`;
+        	alertModal.hide();
+        }
+        
+        let formTag = document.querySelector("form");
+        
+        formTag.addEventListener("submit", (e)=>{
+	        e.preventDefault();
+	        let boolcheck = (inputDate.value != "" && inputData.value != "" && inputType.value != "" && inputDetIndex.value != "" && inputSysIndex.value != "");
+	        if(boolcheck) {
+        		formTag.submit();
+        		//alert([inputDate.value, inputData.value, inputType.value, inputDetIndex.value, inputSysIndex.value, inputRoot.value]);
+        		//console.log([inputDate.value, inputData.value, inputType.value, inputDetIndex.value, inputSysIndex.value, inputRoot.value])
+        	}else {
+        		alert("need fill");
+        	}
+        })
+        
+        let typeS = document.querySelector("#typeS");
+        let typeV = document.querySelector("#typeV");
+        typeS.addEventListener("click", ()=>{
+        	inputType.value = "spectral";
+        	typeV.checked = false;
+        })
+        typeV.addEventListener("click", ()=>{
+        	inputType.value = "vision";
+        	typeS.checked = false;
+        })
+        
+        let switchingInput = document.querySelector("#switchingDiv > input");
+        let switchingLabel = document.querySelector("#switchingDiv > label");
+        
+        let typeF = document.querySelector("#typeF");
+        let typeT = document.querySelector("#typeT");
+        typeF.addEventListener("click", ()=>{
+        	switchingInput.setAttribute("type", "file");
+        	switchingInput.setAttribute("name", "data");
+        	switchingLabel.innerHTML = "FILE";
+        	typeT.checked = false;
+        })
+        typeT.addEventListener("click", ()=>{
+        	switchingInput.setAttribute("type", "text");
+        	switchingInput.setAttribute("name", "dataString");
+        	switchingLabel.innerHTML = "TEXT";
+        	typeF.checked = false;
+        })
+       
+        </script>
+    </body>
+</html>
+ 

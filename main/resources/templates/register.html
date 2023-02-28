@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>스마트가공 - 접속</title>
+        <link href="/css/styles.css" rel="stylesheet" />
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="bg-primary">
+    	<div class="modal modal-sheet position-static d-none bg-secondary py-5" tabindex="-1" role="dialog" id="modalSheet">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content rounded-4 shadow">
+		      <div class="modal-header border-bottom-0">
+		        <h1 class="modal-title fs-5">접속 오류</h1>
+		        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		      </div>
+		      <div class="modal-body py-0">
+		        <p>입력하신 아이디와 비밀번호로 접속하실 수 없습니다, <br> 다시 확인 부탁드립니다.</p>
+		      </div>
+		      <div class="modal-footer flex-column border-top-0">
+		        <button type="button" class="btn btn-lg btn-light w-100 mx-0" data-bs-dismiss="modal" onclick="repage()">확인</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+		
+		<div class="modal fade" id="alertModal" tabindex="-1">
+			<div class="modal-dialog modal-dialog-centered">
+	
+			  <div class="modal-content">
+			  
+			  	<div class="modal-header">
+				  	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-x me-3" viewBox="0 0 16 16">
+					  <path d="M6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+					  <path fill-rule="evenodd" d="M12.146 5.146a.5.5 0 0 1 .708 0L14 6.293l1.146-1.147a.5.5 0 0 1 .708.708L14.707 7l1.147 1.146a.5.5 0 0 1-.708.708L14 7.707l-1.146 1.147a.5.5 0 0 1-.708-.708L13.293 7l-1.147-1.146a.5.5 0 0 1 0-.708z"/>
+					</svg>
+			        <h5 class="modal-title" id="exampleModalCenterTitle">CREATE USER ERROR</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+			    </div>
+			      
+			      <div class="modal-body">
+			        <p>비밀번호가 일치하지 않거나 이미 있는 ID 입니다.</p>
+			      </div>
+			      
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+			      </div>
+	
+			  </div>
+	
+			</div>
+		</div>
+		<div class="modal fade" id="confirmModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+							<div class="modal-dialog modal-dialog-scrollable modal-fullscreen-md-down">
+
+							  <div class="modal-content">
+							  
+							  	  <div class="modal-header">
+							  	  	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building-add me-3" viewBox="0 0 16 16">
+									  <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0Z"/>
+									  <path d="M2 1a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v6.5a.5.5 0 0 1-1 0V1H3v14h3v-2.5a.5.5 0 0 1 .5-.5H8v4H3a1 1 0 0 1-1-1V1Z"/>
+									  <path d="M4.5 2a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm-6 3a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Zm3 0a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5h-1Z"/>
+									</svg>
+							        <h5 class="modal-title">FIND MY SYSTEM</h5>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+							      </div>
+							      
+							      <div class="modal-body">
+							      	<small class="text-muted">사용하실 시스템을 검색해 주세요.</small>
+							      	<div class="form-floating mb-3">
+							      		<input type="text" class="form-control rounded-3" id="searchSysInput">
+							      		<label for="searchSysInput">비즈니스 명을 정확히 입력해주세요</label>
+							      	</div>
+							      	
+							      	<ul class="d-grid gap-1 my-1 list-unstyled" id="findSysList">
+							          
+							        </ul>
+							      
+							      </div>
+							      
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+							      </div>
+
+							  </div>
+
+							</div>
+                        </div>
+		
+    	
+    
+         <div id="layoutAuthentication">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-7">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <div class="form-floating mb-3 mb-md-0">
+                                                        <input class="form-control" id="inputId" type="text" placeholder="Identify" />
+                                                        <label for="inputId">ID</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating">
+                                                        <input class="form-control" id="inputInfo" type="text" placeholder="Discribe" />
+                                                        <label for="inputInfo">INFO</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-floating mb-3" id="sysDiv">
+                                                <input class="form-control" id="inputSystem" type="text"/>
+                                                <input type="hidden" id="inputSysIndex"/>
+                                                <label for="inputSystem">SYSTEM</label>
+                                            </div>
+                                            <div class="row mb-3">
+                                                <div class="col-md-6">
+                                                    <div class="form-floating mb-3 mb-md-0">
+                                                        <input class="form-control" id="inputPassword" type="password" placeholder="Create a password" />
+                                                        <label for="inputPassword">Password</label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-floating mb-3 mb-md-0">
+                                                        <input class="form-control" id="inputPasswordConfirm" type="password" placeholder="Confirm password" />
+                                                        <label for="inputPasswordConfirm">Confirm Password</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="mt-4 mb-0">
+                                                <div class="d-grid"><button class="btn btn-primary btn-block" onclick="createBtn(event)">CREATE ACCOUNT</button></div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="card-footer text-center py-3">
+                                        <div class="small"><a href="login">RETURN TO LOGIN PAGE</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+           
+            <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; KIOST & PNU 2022</div>
+                            <div style= "width: 100%; text-align: right;">
+                                <img src="/img/pukyong.gif" alt="CI" style="height: 90px;">
+                                <img src="/img/kiost.png" alt="CI" style="height: 90px;">
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="/js/scripts.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+        <script type="text/javascript">
+       	let confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'), {keyboard: false, focus : true});
+        let system = document.querySelector("#inputSystem");
+       	system.addEventListener("click",(e)=>{
+       		confirmModal.show();
+       	})
+       	system.addEventListener("focus",(e)=>{
+       		confirmModal.show();
+       	})
+        
+        let search = document.querySelector("#searchSysInput");
+        search.addEventListener("keydown",(e)=>{
+        	if(e.keyCode == 13) {
+        		axios({
+        			method : 'get',
+        			url : `/get/sysByBusiness`,
+        			params : {
+        				"text" : search.value
+        			}
+        		}).then((res)=>{
+        			console.log(res.data);
+        			let syslist = document.querySelector("#findSysList");
+        			let html = "";
+        			for(i of res.data) {
+        				html += `<li class="d-flex gap-1">`;
+        				html += `<div class="ms-3" onclick="selectedSys(${i.index}, '${i.businessDto.title}', '${i.title}')">`;
+        				html += `<h6>${i.businessDto.title}</h6>`;
+        				html += `<p>${i.title}</p>`;
+        				html += `</li>`;
+        				html += `<hr>`;
+        			}
+        			syslist.innerHTML = html;
+        		})
+           		system.disabled = true;
+        	}
+        });
+        function selectedSys(index, business, title) {
+        	let hideInput = document.querySelector("#inputSysIndex");
+        	hideInput.value = index;
+        	system.value = `${business} : ${title}`;
+        	confirmModal.hide();
+        }
+        
+        function createBtn(event) {
+        	event.preventDefault();
+        	let id = document.querySelector("#inputId");
+        	let info = document.querySelector("#inputInfo");
+        	let pw = document.querySelector("#inputPassword");
+        	let cfpw = document.querySelector("#inputPasswordConfirm");
+        	let hideInput = document.querySelector("#inputSysIndex");
+        	
+        	console.log([id.value, info.value, system.value, pw.value, cfpw.value])
+        	
+        	if(id.value != "" && info.value != "" && system.value != "" && pw.value != "" && cfpw.value) {
+        		let alertModal = new bootstrap.Modal(document.getElementById('alertModal'));
+        		if(cfpw.value == pw.value) {
+        			axios({
+        	    		method : "post",
+        	    		url : `/user/create`,
+        	    		params : {
+        	    			"id" : id.value,
+        	    			"password" : pw.value,
+        	    			"info" : info.value,
+        	    			"systemDto" : hideInput.value
+        	    		}
+        	    	}).then((res)=>{
+        	    		console.log(res);
+        	    		console.log(res.data);
+        	    		if(res.data == "fail") {
+        	    			alertModal.show();
+        	    		}else {
+        	    			window.location.href = "/login";
+        	    		}
+        	    	})
+        		}else {
+        			alertModal.show();
+        		}
+        	}
+        	
+        }
+        </script>
+    </body>
+</html>
+ 

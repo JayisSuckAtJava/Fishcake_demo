@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <title>수산식품 스마트가공 서버</title>
+        <link href="/css/styles.css" rel="stylesheet" />
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="sb-nav-fixed">
+
+        <!--    탑 네비   -->
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            
+            <!-- 제목-->
+            <a class="navbar-brand ps-3" href="/index" style="margin-right: 15px;">수산식품 스마트가공 서버</a>
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+            <!-- Navbar-->
+            <div class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            </div>
+            <div>
+                <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/login">LOGIN</a></li>
+                            <li><a class="dropdown-item" href="/logout">LOGOUT</a></li>
+                            <li><hr th:if="${session.BID == 0}" class="dropdown-divider"></li>
+                            <li><a th:if="${session.BID == 0}" class="dropdown-item" href="/setting">SETTING</a></li>
+                            <li><a th:if="${session.BID == 0}" class="dropdown-item" href="/object">OBJECT</a></li>
+                            <li><a th:if="${session.BID == 0}" class="dropdown-item" href="/register">REGISTER</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div id="layoutSidenav">
+            <!-- 여기 top 보내야함 사이드바-->
+            <div id="layoutSidenav_nav" style="top : 10%">
+                <nav>
+                    
+                    <div th:if="${session.BID == 0}" class="container-fluid px-4" id="businessDiv">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                </svg>
+                                &nbsp;    BUSINESS
+                            </div>
+                            <div class="card-body">
+                                <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+                                    <div class="dataTable-top"></div>
+                                    <div class="dataTable-container" style="overflow: hidden;">
+                                        <table id="businessTable" class="dataTable-table">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 5.7368%;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building" viewBox="0 0 16 16">
+														  <path fill-rule="evenodd" d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022zM6 8.694 1 10.36V15h5V8.694zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15z"/>
+														  <path d="M2 11h1v1H2v-1zm2 0h1v1H4v-1zm-2 2h1v1H2v-1zm2 0h1v1H4v-1zm4-4h1v1H8V9zm2 0h1v1h-1V9zm-2 2h1v1H8v-1zm2 0h1v1h-1v-1zm2-2h1v1h-1V9zm0 2h1v1h-1v-1zM8 7h1v1H8V7zm2 0h1v1h-1V7zm2 0h1v1h-1V7zM8 5h1v1H8V5zm2 0h1v1h-1V5zm2 0h1v1h-1V5zm0-2h1v1h-1V3z"/>
+														</svg>
+                                                    </th>
+                                                    <th>
+                                                        <a href="#" class="dataTable-sorter">Name</a>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+	                                            <tr th:each="business : ${businessList}" onclick="getSys(this)">
+	                                            	<td th:text="${business.index}"></td>
+                                                    <td th:text="${business.title}"></td>
+	                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="dataTable-bottom">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div th:if="${session.BID != null}" class="container-fluid px-4" id="systemDiv">
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt" viewBox="0 0 16 16">
+                                    <path d="M12.166 8.94c-.524 1.062-1.234 2.12-1.96 3.07A31.493 31.493 0 0 1 8 14.58a31.481 31.481 0 0 1-2.206-2.57c-.726-.95-1.436-2.008-1.96-3.07C3.304 7.867 3 6.862 3 6a5 5 0 0 1 10 0c0 .862-.305 1.867-.834 2.94zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                                    <path d="M8 8a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                                </svg>
+                                &nbsp;    SYSTEM
+                            </div>
+                            <div class="card-body">
+                                <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+                                    <div class="dataTable-top"></div>
+                                    <div class="dataTable-container" style="overflow: hidden;">
+                                        <table id="systemTable" class="dataTable-table">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 5.7368%;">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-123" viewBox="0 0 16 16">
+                                                            <path d="M2.873 11.297V4.142H1.699L0 5.379v1.137l1.64-1.18h.06v5.961h1.174Zm3.213-5.09v-.063c0-.618.44-1.169 1.196-1.169.676 0 1.174.44 1.174 1.106 0 .624-.42 1.101-.807 1.526L4.99 10.553v.744h4.78v-.99H6.643v-.069L8.41 8.252c.65-.724 1.237-1.332 1.237-2.27C9.646 4.849 8.723 4 7.308 4c-1.573 0-2.36 1.064-2.36 2.15v.057h1.138Zm6.559 1.883h.786c.823 0 1.374.481 1.379 1.179.01.707-.55 1.216-1.421 1.21-.77-.005-1.326-.419-1.379-.953h-1.095c.042 1.053.938 1.918 2.464 1.918 1.478 0 2.642-.839 2.62-2.144-.02-1.143-.922-1.651-1.551-1.714v-.063c.535-.09 1.347-.66 1.326-1.678-.026-1.053-.933-1.855-2.359-1.845-1.5.005-2.317.88-2.348 1.898h1.116c.032-.498.498-.944 1.206-.944.703 0 1.206.435 1.206 1.07.005.64-.504 1.106-1.2 1.106h-.75v.96Z"/>
+                                                        </svg>
+                                                    </th>
+                                                    <th>
+                                                        <a href="#" class="dataTable-sorter">Name</a>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            	<tr th:each="system : ${systemList}" onclick="thisSystem(this)">
+	                                            	<td th:text="${system.index}"></td>
+                                                    <td th:text="${system.title}"></td>
+	                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="dataTable-bottom">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="container-fluid px-4" id="inspectionDiv" style="display : none">
+                        <div class="card mb-4">
+
+                            <div class="card-header">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-subtract" viewBox="0 0 16 16">
+                                    <path d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2z"/>
+                                </svg>
+                                INSPECTION OBJECT
+                                <div onclick="objToSys()" style="display : inline; cursor:pointer">
+	                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-backspace" viewBox="0 0 16 16">
+									  <path d="M5.83 5.146a.5.5 0 0 0 0 .708L7.975 8l-2.147 2.146a.5.5 0 0 0 .707.708l2.147-2.147 2.146 2.147a.5.5 0 0 0 .707-.708L9.39 8l2.146-2.146a.5.5 0 0 0-.707-.708L8.683 7.293 6.536 5.146a.5.5 0 0 0-.707 0z"/>
+									  <path d="M13.683 1a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-7.08a2 2 0 0 1-1.519-.698L.241 8.65a1 1 0 0 1 0-1.302L5.084 1.7A2 2 0 0 1 6.603 1h7.08zm-7.08 1a1 1 0 0 0-.76.35L1 8l4.844 5.65a1 1 0 0 0 .759.35h7.08a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-7.08z"/>
+									</svg>
+								</div>
+                            </div>
+
+                            <div class="card-body">
+                                <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+                                    <div class="dataTable-top"></div>
+                                        <div class="dataTable-container" style="overflow: hidden;">
+                                            <table id="objectTable" class="dataTable-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 5.7368%;">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-123" viewBox="0 0 16 16">
+                                                                <path d="M2.873 11.297V4.142H1.699L0 5.379v1.137l1.64-1.18h.06v5.961h1.174Zm3.213-5.09v-.063c0-.618.44-1.169 1.196-1.169.676 0 1.174.44 1.174 1.106 0 .624-.42 1.101-.807 1.526L4.99 10.553v.744h4.78v-.99H6.643v-.069L8.41 8.252c.65-.724 1.237-1.332 1.237-2.27C9.646 4.849 8.723 4 7.308 4c-1.573 0-2.36 1.064-2.36 2.15v.057h1.138Zm6.559 1.883h.786c.823 0 1.374.481 1.379 1.179.01.707-.55 1.216-1.421 1.21-.77-.005-1.326-.419-1.379-.953h-1.095c.042 1.053.938 1.918 2.464 1.918 1.478 0 2.642-.839 2.62-2.144-.02-1.143-.922-1.651-1.551-1.714v-.063c.535-.09 1.347-.66 1.326-1.678-.026-1.053-.933-1.855-2.359-1.845-1.5.005-2.317.88-2.348 1.898h1.116c.032-.498.498-.944 1.206-.944.703 0 1.206.435 1.206 1.07.005.64-.504 1.106-1.2 1.106h-.75v.96Z"/>
+                                                            </svg>
+                                                        </th>
+                                                        <th>
+                                                            <a href="#" class="dataTable-sorter">Name</a>
+                                                        </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                   <!--  <tr th:each="object : ${objectList}" onclick="clickObject(this)">
+                                                        <td th:text="${object.index}"></td>
+                                                        <td th:text="${object.ko}"></td>
+                                                    </tr> -->
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    <div class="dataTable-bottom">
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                </nav>
+            </div>
+            <!-- 메인 컨텐츠-->
+            <div id="layoutSidenav_content">
+                <main>
+                    <!-- Content 2 입니다.-->
+                    <div class="container-fluid px-4" id="content_display">
+                        <h1 class="mt-4">검출 품목 설정</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">조회 및 설정 추가 삭제</li>
+                        </ol>
+                        <div class="row">
+                            <div class="col-xl-3">
+
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-exclamation-octagon" viewBox="0 0 16 16">
+                                            <path d="M4.54.146A.5.5 0 0 1 4.893 0h6.214a.5.5 0 0 1 .353.146l4.394 4.394a.5.5 0 0 1 .146.353v6.214a.5.5 0 0 1-.146.353l-4.394 4.394a.5.5 0 0 1-.353.146H4.893a.5.5 0 0 1-.353-.146L.146 11.46A.5.5 0 0 1 0 11.107V4.893a.5.5 0 0 1 .146-.353L4.54.146zM5.1 1 1 5.1v5.8L5.1 15h5.8l4.1-4.1V5.1L10.9 1H5.1z"/>
+                                            <path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 4.995z"/>
+                                        </svg>
+                                        &nbsp;    DETECTION SUBSTANCE
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="dataTable-wrapper dataTable-loading no-footer sortable searchable fixed-columns">
+                                            <div class="dataTable-top">
+                                            </div>
+                                            <div class="dataTable-container">
+                                                <table id="substanceTable" class="dataTable-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width : 15.0651%">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-123" viewBox="0 0 16 16">
+                                                                    <path d="M2.873 11.297V4.142H1.699L0 5.379v1.137l1.64-1.18h.06v5.961h1.174Zm3.213-5.09v-.063c0-.618.44-1.169 1.196-1.169.676 0 1.174.44 1.174 1.106 0 .624-.42 1.101-.807 1.526L4.99 10.553v.744h4.78v-.99H6.643v-.069L8.41 8.252c.65-.724 1.237-1.332 1.237-2.27C9.646 4.849 8.723 4 7.308 4c-1.573 0-2.36 1.064-2.36 2.15v.057h1.138Zm6.559 1.883h.786c.823 0 1.374.481 1.379 1.179.01.707-.55 1.216-1.421 1.21-.77-.005-1.326-.419-1.379-.953h-1.095c.042 1.053.938 1.918 2.464 1.918 1.478 0 2.642-.839 2.62-2.144-.02-1.143-.922-1.651-1.551-1.714v-.063c.535-.09 1.347-.66 1.326-1.678-.026-1.053-.933-1.855-2.359-1.845-1.5.005-2.317.88-2.348 1.898h1.116c.032-.498.498-.944 1.206-.944.703 0 1.206.435 1.206 1.07.005.64-.504 1.106-1.2 1.106h-.75v.96Z"/>
+                                                                </svg>
+                                                            </th>
+                                                            <th>Name</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- <div class="dataTable-bottom">
+                                            </div> -->
+                                        </div>
+                                        
+                                    </div>
+                                    <!-- <div class="card-footer">
+                                    </div> -->
+                                </div>
+
+                            </div>
+                            <div class="col-xl-9">
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-sliders2-vertical" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M0 10.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1H3V1.5a.5.5 0 0 0-1 0V10H.5a.5.5 0 0 0-.5.5ZM2.5 12a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2a.5.5 0 0 0-.5-.5Zm3-6.5A.5.5 0 0 0 6 6h1.5v8.5a.5.5 0 0 0 1 0V6H10a.5.5 0 0 0 0-1H6a.5.5 0 0 0-.5.5ZM8 1a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2A.5.5 0 0 0 8 1Zm3 9.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1H14V1.5a.5.5 0 0 0-1 0V10h-1.5a.5.5 0 0 0-.5.5Zm2.5 1.5a.5.5 0 0 0-.5.5v2a.5.5 0 0 0 1 0v-2a.5.5 0 0 0-.5-.5Z"/>
+                                        </svg>  
+                                        &nbsp;    DETECTION SETTING
+                                    </div>
+                                    <div class="card-body">
+                                    	<div id="displayTwo">
+                                    	    <div class="row mb-3">
+
+
+                                                <div class="col-md-4">
+                                                    <div class="form-floating mb-3 mb-md-0">
+                                                        <input class="form-control" id="inputOindex" disabled>
+                                                        <label for="inputOindex">OBJECT INDEX</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-floating">
+                                                        <input class="form-control" id="inputSindex" disabled>
+                                                        <label for="inputSindex">SUBSTANCE INDEX</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-floating mb-3 mb-md-0">
+                                                        <input class="form-control" id="inputChar" disabled>
+                                                        <label for="inputChar">CHARACTER</label>
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+
+
+                                            
+                                            <div class="row mb-3">
+                                                
+                                                <div class="col-md-4">
+                                                    <div class="form-floating mb-3 mb-md-0">
+                                                        <input class="form-control" id="inputRed">
+                                                        <label for="inputRed">RED</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-4">
+                                                    <div class="form-floating mb-3 mb-md-0">
+                                                        <input class="form-control" id="inputGreen">
+                                                        <label for="inputGreen">GREEN</label>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="col-md-4">
+                                                    <div class="form-floating mb-3 mb-md-0">
+                                                        <input class="form-control" id="inputBlue">
+                                                        <label for="inputBlue">BLUE</label>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+
+                                            <div class="form-floating mb-3">
+                                                <input class="form-control" id="inputTitle">
+                                                <label for="inputTitle">TITLE</label>
+                                            </div>
+
+                                    	</div>
+                                    </div>
+
+                                    <div class="card-footer" id="setFoot">
+                                    	<div class="d-flex justify-content-sm-end">
+                                    		<button class="btn btn-primary" style="margin-right : 5px" disabled id="createButton" onclick="setting(0, 'create')">생성</button>
+                                    		<button class="btn btn-primary" style="margin-right : 5px" disabled>복원</button>
+                                    		<button class="btn btn-primary" style="margin-right : 5px" disabled>저장</button>
+                                            <button class="btn btn-primary" disabled>삭제</button>
+                                    	</div>
+                                    </div>
+
+                                </div>
+                            </div>
+                    </div>
+
+                        <!--  모달  -->
+		                    <!-- Vertically centered modal -->
+		                <div class="modal fade" id="alertModal" tabindex="-1">
+							<div class="modal-dialog modal-dialog-centered">
+
+							  <div class="modal-content">
+							  
+							  	<div class="modal-header">
+								  	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-break me-3" viewBox="0 0 16 16">
+									  <path d="M14 4.5V9h-1V4.5h-2A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v7H2V2a2 2 0 0 1 2-2h5.5L14 4.5zM13 12h1v2a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2v-2h1v2a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-2zM.5 10a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1H.5z"/>
+									</svg>
+							        <h5 class="modal-title" id="exampleModalCenterTitle">CREATE SUBSTANCE ERROR</h5>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+							    </div>
+							      
+							      <div class="modal-body">
+							        <p>입력하신 값의 타입 불 일치 혹은 중복되는 값입니다.</p>
+							      </div>
+							      
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+							      </div>
+
+							  </div>
+
+							</div>
+						</div>
+							
+							
+							<!-- Vertically centered scrollable modal -->
+						<div class="modal fade" id="confirmModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+							<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+
+							  <div class="modal-content">
+							  
+							  	  <div class="modal-header">
+							  	  	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="me-3 bi bi-check-circle" viewBox="0 0 16 16">
+									  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+									  <path d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z"/>
+									</svg>
+							        <h5 class="modal-title">CONFIRM TO DELETE SUBSTANCE</h5>
+							        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+							      </div>
+							      
+							      <div class="modal-body">
+							        <p>정말 삭제하시겠습니까?</p>
+							      </div>
+							      
+							      <div class="modal-footer">
+							        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+							        <button type="button" class="btn btn-primary" id="deleteSubstanceConfirm">확인</button>
+							      </div>
+
+							  </div>
+
+							</div>
+                        </div>
+                </main>
+                <!-- 푸터-->
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid px-4">
+
+                        <div class="d-flex align-items-center justify-content-between small">
+
+                            <div class="text-muted">Copyright &copy; KIOST & PNU 2022</div>
+
+                            <div style= "width: 100%; text-align: right;">
+                                <img src="/img/pukyong.gif" alt="CI" style="height: 90px;">
+                                <img src="/img/kiost.png" alt="CI" style="height: 90px;">
+                            </div>
+                        </div>
+
+                    </div>
+                </footer>
+
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    </body>
+    <script src="/js/scripts.js"></script>
+	<script th:inline="javascript">
+	
+	let bDiv = document.querySelector("#businessDiv");
+    let sDiv = document.querySelector("#systemDiv");
+    let iDiv = document.querySelector("#inspectionDiv");
+    sDiv.style.display = "none";
+    
+    
+    /*<![CDATA[*/
+    
+    let bid = /*[[${session.BID}]]*/;
+    
+    /*]]>*/
+    
+    /** System 접속시 LOG 전체를 받아올 객체. func tableChoose(System) 으로 제어 **/
+    
+    
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script type="text/javascript">
+    if(bid != 0) {
+    	sDiv.style.display = "block";
+    }
+    
+    /** Axios Script **/
+    let data = {};
+    let curObj;
+    
+    let alertModal = new bootstrap.Modal(document.getElementById('alertModal'))
+    let confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'), {keyboard: false, focus : true})
+
+    function getSubstance(object) {
+        data = {}
+        axios({
+            method : "get",
+            url : `/get/object/${object}/substance`
+        }).then((res)=>{
+
+            let substanceTable = document.querySelector("#substanceTable > tbody");
+            let html = "";
+            for(i of res.data) {
+                html += `<tr onclick="clickSubstance(this)">`;
+                html += `<td>${i.id}</td>`;
+                html += `<td>${i.title}</td>`;
+                html += `</tr>`;
+
+                data[i.id] = { 'oIndex' : i.itemIndex, 'sIndex' : i.index, 'char' : i.character, 'red' : i.red, 'blue' : i.blue, 'green' : i.green, 'title' : i.title};
+                
+            }
+            substanceTable.innerHTML = html;
+            curObj = object;
+        })
+    }
+    
+    function doAxios(param, which) {
+    	axios({
+    		method : "post",
+    		url : `/get/object/${which}`,
+    		params : param
+    	}).then((res)=>{
+    		refreshForCurObj();
+    	}).catch((err)=>{
+    		if(err.response.status == 400 && which == "create") {
+    			alertModal.show();
+    		}
+    	})
+    }
+    
+    function getSys(tr) {
+    	let index = tr.firstElementChild.innerHTML;
+    	axios({
+    		method: "get",
+    		url : `/get/system/${index}`
+    	}).then((res)=>{
+    		let table = document.querySelector("#systemTable > tbody")
+    		let html = ""
+    		for(i of res.data) {
+    			html += `<tr onclick="thisSystem(this)">`
+   				html += `<td>${i.index}</td>`
+				html += `<td>${i.title}</td>`
+				html += `</tr>`
+    		}
+    		table.innerHTML = html;
+    	})
+    	bDiv.style.display = "none";
+    	sDiv.style.display = "block";
+    }
+    
+    function thisSystem(tr) {
+    	let index = tr.firstElementChild.innerHTML;
+    	axios({
+    		method: "get",
+    		url : `/get/object/${index}`
+    	}).then((res)=>{
+    		let table = document.querySelector("#objectTable > tbody");
+    		html = "";
+    		
+    		for(i of res.data) {
+    			html += `<tr onclick="clickObject(this)">`;
+    			html += `<td>${i.index}</td>`;
+    			html += `<td>${i.ko}</td>`;
+    			html += `</tr>`;
+    		}
+    		table.innerHTML = html;
+    	})
+    	sDiv.style.display = "none";
+    	iDiv.style.display = "block";
+    }
+   
+    </script>
+    
+    <script type="text/javascript">
+    // 단순 기능 Script
+        function setting(index, which) {
+            let inputOindex = document.querySelector("#inputOindex")
+            let inputSindex = document.querySelector("#inputSindex")
+            let inputChar = document.querySelector("#inputChar")
+            let inputRed = document.querySelector("#inputRed")
+            let inputGreen = document.querySelector("#inputGreen")
+            let inputBlue = document.querySelector("#inputBlue")
+            let inputTitle = document.querySelector("#inputTitle")
+            let inputButtons = document.querySelectorAll("#setFoot > div > button") // 0 생성 1 복원 2 저장 3 삭제
+            let createButton = document.querySelector("#createButton");
+            let confirmButton = document.querySelector("#deleteSubstanceConfirm");
+
+
+            for(i of inputButtons) {
+            	
+            	switch(i.innerHTML) {
+            		case "복원" :
+            			i.setAttribute('onclick' , `setting(${index}, "read")`);3
+            			i.disabled = false;
+            			break;
+            		case "저장" :
+            			i.setAttribute('onclick' , `setting(${index}, "update")`);
+            			i.disabled = false;
+            			break;
+            		case "삭제" :
+            			i.setAttribute('onclick' , `setting(${index}, "delete")`);
+            			i.disabled = false;
+            			break;
+            		default :
+            			i.disabled = false;
+            			break;
+            	}
+            	/*
+                if(i.innerHTML == "복원") {
+                    i.setAttribute('onclick' , `setting(${index}, "read")`);
+                    i.disabled = false;
+                } else if(i.innerHTML == "저장") {
+                    i.setAttribute('onclick' , `setting(${index}, "update")`);
+                    i.disabled = false;
+                } else if(i.innerHTML == "삭제") {
+                    i.setAttribute('onclick' , `setting(${index}, "delete")`);
+                    i.disabled = false;
+                }else {
+                    i.disabled = true;
+                }
+            	*/
+                
+            }
+            let substance = {
+                "id" : index,
+                "index" : inputSindex.value,
+                "itemIndex" : inputOindex.value,
+                "character" : inputChar.value,
+                "red" : inputRed.value,
+                "green" : inputGreen.value,
+                "blue" : inputBlue.value,
+                "title" : inputTitle.value,
+                "obj" : curObj
+            }
+
+            switch(which) {
+
+                case 'read' :
+                    inputOindex.value = data[index].oIndex;
+                    inputSindex.value = data[index].sIndex;
+                    inputChar.value = data[index].char;
+                    inputRed.value = data[index].red;
+                    inputGreen.value = data[index].green;
+                    inputBlue.value = data[index].blue;
+                    inputTitle.value = data[index].title;
+                    inputOindex.disabled = true;
+                    inputSindex.disabled = true;
+                    inputChar.disabled = true;
+                    confirmButton.setAttribute('onclick' , `deleteSubstance(${index})`);
+                    
+                    
+                    break;
+                case 'create' :
+                    inputSindex.disabled = false;
+                    inputSindex.focus();
+                    inputChar.disabled = false;
+                    
+                	inputOindex.value = curObj;
+                    inputSindex.value = '';
+                    inputChar.value = '';
+                    inputRed.value = '';
+                    inputGreen.value = '';
+                    inputBlue.value = '';
+                    inputTitle.value = '';
+                    
+                    for(i of inputButtons) {
+                    	i.disabled = true;
+                    	if(i.innerHTML == "저장") {
+                    		i.disabled = false;
+                    		i.setAttribute('onclick' , `newSubstance()`);
+                    	}
+                    }
+                    
+                    
+                    break;
+                case 'update' :
+                    doAxios(substance, 'update');
+                    break;
+                case 'delete' :
+                	confirmModal.show();
+                    break;
+            }
+        }
+
+		function newSubstance() {
+			let substance = {
+	                "id" : null,
+	                "index" : inputSindex.value,
+	                "itemIndex" : inputOindex.value,
+	                "character" : inputChar.value,
+	                "red" : inputRed.value,
+	                "green" : inputGreen.value,
+	                "blue" : inputBlue.value,
+	                "title" : inputTitle.value,
+	                "obj" : curObj
+	            }
+			doAxios(substance, 'create');
+		}
+		
+		function deleteSubstance(index) {
+			doAxios({index : parseInt(index)}, 'delete');
+			confirmModal.hide();
+		}
+		
+		function refreshForCurObj() {
+			let objectList = document.querySelectorAll("#objectTable > tbody > tr");
+			for(i of objectList) {
+				if(i.style.background == "rgba(0, 0, 0, 0.150)" || i.firstElementChild.innerHTML == curObj) {
+					clickObject(i);
+					
+				}
+			}
+		}
+		
+		/** systemTable 의 TR 클릭시 작동하는 FUNC **/
+        function clickSystem(tr) {
+            // 해당 테이블 위치 지정
+        	let systemList = document.querySelectorAll("#systemTable > tbody > tr")
+            
+            // 전체 TR 배경 원복 및 지정 TR 배경 변경
+            for(i of systemList) {
+                i.style.background = "white"
+            }
+            tr.style.background = "rgba(0, 0, 0, 0.150)"
+        }
+
+        /** logTable 의 TR 클릭시 작동하는 FUNC **/
+        function clickLog(tr) {
+            // 해당 테이블 위치 지정
+            let logList = document.querySelectorAll("#logTable > tbody > tr")
+
+            // 전체 TR 배경 원복 및 지정 TR 배경 변경
+            for(i of logList) {
+                i.style.background = "white"
+            }
+            tr.style.background = "rgba(0, 0, 0, 0.150)"
+        }
+
+
+        /** objectTable 의 TR 클릭시 작동하는 FUNC **/
+        function clickObject(tr) {
+            // 해당 테이블 위치 지정
+        	let objectList = document.querySelectorAll("#objectTable > tbody > tr")
+            
+            let index = tr.firstElementChild.innerHTML;
+            getSubstance(index);
+
+            let inputButtons = document.querySelectorAll("#setFoot > div > button")
+            let createButton = document.querySelector("#createButton");
+            let inputOindex = document.querySelector("#inputOindex");
+            let inputSindex = document.querySelector("#inputSindex");
+            let inputChar = document.querySelector("#inputChar");
+            let inputRed = document.querySelector("#inputRed");
+            let inputGreen = document.querySelector("#inputGreen");
+            let inputBlue = document.querySelector("#inputBlue");
+            let inputTitle = document.querySelector("#inputTitle");
+
+			for(i of inputButtons) {
+				i.disabled = true;
+			}
+            createButton.disabled = false;
+            inputOindex.disabled = true;
+            inputSindex.disabled = true;
+            inputChar.disabled = true;
+
+            inputOindex.value = '';
+            inputSindex.value = '';
+            inputChar.value = '';
+            inputRed.value = '';
+            inputGreen.value = '';
+            inputBlue.value = '';
+            inputTitle.value = '';
+
+            // 전체 TR 배경 원복 및 지정 TR 배경 변경
+            for(i of objectList) {
+                i.style.background = "white"
+            }
+            tr.style.background = "rgba(0, 0, 0, 0.150)"
+        }
+
+        /** substanceTable 의 TR 클릭시 작동하는 FUNC **/
+        function clickSubstance(tr) {
+            // 해당 테이블 위치 지정
+            let substanceList = document.querySelectorAll("#substanceTable > tbody > tr")
+
+            let index = tr.firstElementChild.innerHTML;
+            setting(index , 'read');
+
+            // 전체 TR 배경 원복 및 지정 TR 배경 변경
+            for(i of substanceList) {
+                i.style.background = "white"
+            }
+            tr.style.background = "rgba(0, 0, 0, 0.150)"
+        }
+        
+        function objToSys() {
+        	console.log('hi')
+        	iDiv.style.display = "none";
+        	sDiv.style.display = "block";
+        }
+        
+        
+    </script>
+</html>
